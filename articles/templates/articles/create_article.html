@@ -1,0 +1,17 @@
+{%extends 'articles/base.html'%}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{%load staticfiles%}
+{%block article_form %}
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery.jqtransform.js"></script>
+
+<form class="jqtransform" method="post" action="{% url 'articles:create_article'%}" enctype="multipart/form-data">
+    <div class="rowElem">
+        {%csrf_token%}
+        {{form|crispy}}
+    </div>
+    <input class="btn btn-success" type="submit" value="Create Article" />
+</form>
+<script src="/static/js/slugify.js"></script>
+{% endblock %}

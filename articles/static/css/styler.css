@@ -1,0 +1,68 @@
+body{
+  background-color: teal;
+}
+header{
+  background-color: teal;
+}
+.card{
+  background-color: black;
+  align-content:stretch;
+  font:caption;
+  font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+  border: aqua dashed;
+}
+.footer p{
+    text-align: center;
+    text-justify: auto;
+    text-decoration: whitesmoke blink;
+    background-color: black;
+    text-shadow: transparent;
+    text-decoration-color: rgb(whitesmoke);
+}
+a{
+    color: green;
+    animation: ease-out;
+}
+.jumbotron{
+    background-image: url(/static/coinnews.png);
+    opacity: 20;
+    image-orientation: calc;
+    background-position: all;
+    padding-top: 15px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-color: cadetblue;
+}
+
+
+.textContact{
+  text-align: left;
+  text-decoration-color: green;
+}
+#email{
+  color: red;
+}
+
+#twitter{
+  text-decoration: aquamarine;
+  align-content: space-between;
+}
+.facebook{
+  text-decoration: blue;
+  align-content: flex-end;
+}
+aside{
+    align-content: flex-end;
+}
+
+.text-primary{
+    text-transform: capitalize;
+    text-align: center;
+}
+.card-text{
+  background-color: white;
+}
+
+.image-height{
+  background-color: white;
+}

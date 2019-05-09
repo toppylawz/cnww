@@ -1,0 +1,123 @@
+﻿{% load bootstrap4 %}
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../../../favicon.ico">-->
+
+    <title>CNWW website</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{%static 'js/jquery.js'%}"></script>
+
+</head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/articles">CNWW Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" href="http://localhost:8000/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="/articles">Blog</a>
+          </div>
+        </div>
+      </nav>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">I am a software enthusiast with persionate interest in how Cryptocurrencies can help improve daily living.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <form method="GET" action="" class="form-inline">
+          {%csrf_token%}
+          <input class="form-control mr-sm-2" type="search"  name="quote" placeholder="content, title, author" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value='{{request.GET.quote}}'>Search Blog</button>
+        </form>
+      </nav>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <strong>Album</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="jumbotron container-fluid">
+        <h1 class="display-3">Welcome to CNWW Blog!</h1>
+        <p class="lead">Here you can get latest blog posts from CNWW and advice on the crypto investment</p>
+        <hr class="my-4">
+        <!--<p>If you find this website helpful, $5 USD worth of crypto currency will really go a long way for us</p>-->
+        <div col-sm-4 offset-md-1 py-4><h4 class="textContact text-center">Contact Us</h4>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" target="_blank" href="#" role="button">E-Mail</a>
+            <a class="btn btn-primary btn-lg" target="_blank" href="#" role="button">Facebook</a>
+            <a class="btn btn-primary btn-lg" target="_blank" href="#" role="button">Twitter</a>
+        </p>
+       </div>
+      </div>
+      {%block article_title%}
+      {%endblock%}
+
+      <div class="blog-header">
+        <div class="container">
+          <h1 class="blog-title">The CNWW Blog</h1></br>
+          <p class="lead blog-description">
+          <div id="fb-root"></div>
+          <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2"></script>
+          <div id="fb-root"></div>
+         <div class="container justify-content-left">
+           <p>
+          {% block article_full%}
+          {%endblock%}
+
+          {%block article_short%}
+          {%endblock%}
+
+          {%block article_form%}
+          {%endblock article_form%}
+
+          {%block slideshow %}
+          {%endblock slideshow%}
+
+           </p>
+         </div>
+         {% include "articles/messages.html"%}
+        </div>
+      </div>
+    </header>
+    <footer class="footer text-muted">
+      <div class="container text-center">
+        <p class="float-right">
+          <a href="#"><input type="button" value="Back To Top"/></a>
+        </p>
+        <p>CNWW &copy; Cryptonews Worlwide {%now 'Y'%}</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{%static 'js/jquery.min.js'%}"></script>
+    <script src="{%static 'js/popper.min.js'%}"></script>
+    <script src="{%static 'js/bootstrap.min.js'%}"></script>
+  </body>
+</html>

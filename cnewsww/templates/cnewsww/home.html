@@ -1,0 +1,168 @@
+﻿{% load bootstrap4 %}
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{url 'static/media/coin.png'}">
+
+    <title>CNWW website</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{%static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styler.css' %}">
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{url 'cryptos:home'}">CNWW Latest News</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link active" href="{url 'cryptos:home'}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="/articles">Blog</a>
+          </div>
+        </div>
+      </nav>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">I am a software enthusiast with persionate interest in how Cryptocurrencies can help improve daily living.</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="mailto: olofintuyiadeolu@outlook.co.uk" class="text-white"><input type="button" value="Email Me"/></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <form method="GET" class="form-inline">
+          {%csrf_token%}
+          <input class="form-control mr-sm-2" name="q" type="search" placeholder="Cryptocurrency" action="{url 'cryptos:single'}" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Cryptocurrency</button>
+        </form>
+      </nav>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <strong>Album</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Crypto News Worldwide</h1>
+          <p class="lead text-muted">Get updated crypto currency happenings all over the world and get updated price of the top 10 coins</p>
+          <p>
+              <a href="#" class="btn-group btn btn-primary my-2" target="">Twitter</a>
+              <a class="btn-group btn btn-primary my-2" target="_blank" href="#">E-Mail</a>
+              <a href="#" class="btn btn-secondary my-2" target="_blank">Facebook</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+          <div class="container">
+
+              <table class="table table-striped table-dark table-hover table-bordered ml-auto">
+                  <thead>
+                      <tr>
+                          <th scope="col">NAME</th>
+                          <th scope="col">CURRENT PRICE</th>
+                          <th scope="col">LAST UPDATED</th>
+                          <th scope="col">MARKET CAP</th>
+                      </tr>
+                  </thead>
+
+                  {% for key,value in data.DISPLAY.items %}
+                  <tbody>
+                      <tr>
+                          <td>{{key}}</td>
+                          <td>{{value.USD.PRICE}}</td>
+                          <td>{{value.USD.LASTUPDATE}}</td>
+                          <td>{{value.USD.MKTCAP}}</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+
+              <div class="album py-5 bg-dark">
+                  <div class="container">
+                      <div class="row ml-auto">
+                          {% for x in api.Data %}
+                          <div class="col-sm">
+                              <div class="card" style="width: 18rem;">
+                                  <img class="card-img-top" src="{{x.imageurl}}" alt="{{x.source}}">
+                                  <div class="card-body">
+                                      <h5 class="card-title">{{x.title}}</h5>
+                                      <h4><p class="card-text">{{x.body}}</p></h4>
+                                      <a href="{{x.url}}" class="btn btn-secondary">Read More</a>
+                                  </div>
+                              </div>
+                              </br>
+                          </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+              <div class="pagination">
+                  <span class="step-links">
+                      {% if qset.has_previous %}
+                      <a href="?page=1">&laquo; first</a>
+                      <a href="?page={{ qset.previous_page_number }}">previous</a>
+                      {% endif %}
+
+                      <span class="current">
+                          Page {{ qset.number }} of {{qset.paginator.num_pages }}.
+                      </span>
+
+                      {% if contacts.has_next %}
+                      <a href="?page={{ qset.next_page_number }}">next</a>
+                      <a href="?page={{ qset.paginator.num_pages }}">last &raquo;</a>
+                      {% endif %}
+                  </span>
+              </div>
+          </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container text-center">
+        <p class="float-right">
+          <a href="#"><input type="button" value="Back To Top"/></a>
+        </p>
+        <p>CNWW &copy; Cryptonews Worlwide {%now 'Y'%}</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
