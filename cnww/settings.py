@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cnww_db',
         'USER':'postgres',
-        'PASSWORD':'talps4riL...',
+        'PASSWORD':'dancers',
         'HOST':'localhost',
         'PORT':'5432'
     }
